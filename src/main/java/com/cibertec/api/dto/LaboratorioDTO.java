@@ -6,4 +6,6 @@ import lombok.Data;
 public class LaboratorioDTO {
 	private Integer codigo;
 	private String descripcion;
+	
+	
 }

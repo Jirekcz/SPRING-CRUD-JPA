@@ -12,11 +12,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 // 1
+@Data
 @Entity
 @Table(name = "tb_laboratorio")
-@Data
 public class Laboratorio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,30 +32,4 @@ public class Laboratorio {
 	@OneToMany(mappedBy = "laboratorio")
 	@JsonIgnore
 	private List<Medicamento> listaMedicamentos;
-
-	public Integer getCodigo() {
-		return codigo;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public List<Medicamento> getListaMedicamentos() {
-		return listaMedicamentos;
-	}
-
-	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public void setListaMedicamentos(List<Medicamento> listaMedicamentos) {
-		this.listaMedicamentos = listaMedicamentos;
-	}
-
-	
 }

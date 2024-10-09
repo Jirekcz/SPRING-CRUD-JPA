@@ -17,4 +17,5 @@ public class MedicamentoDTO {
 	private int stock;
 	private double precio;
 	private LocalDate fecha;
+	private LaboratorioDTO laboratorio;
 }
