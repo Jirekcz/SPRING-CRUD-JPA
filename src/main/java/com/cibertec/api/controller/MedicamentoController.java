@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cibertec.api.entidad.Laboratorio;
 import com.cibertec.api.entidad.Medicamento;
 import com.cibertec.api.serviceImpl.MedicamentoService;
+import com.cibertec.api.utils.ModelNotFoundException;
+
+import jakarta.validation.Valid;
 
 // 4
 @RestController
@@ -30,11 +34,16 @@ public class MedicamentoController {
 	
 	@GetMapping("/buscar/{codigo}")
 	public Medicamento buscar(@PathVariable Integer codigo) throws Exception {
-		return serviceMed.buscar(codigo);
+		Medicamento bean = serviceMed.buscar(codigo);
+		if (bean == null) {
+			throw new ModelNotFoundException("Codigo no encontrado:" + codigo);
+		} else {
+			return serviceMed.buscar(codigo);
+		}
 	}
 	
 	@PostMapping("/registrar")
-	public void registrar(@RequestBody Medicamento bean) throws Exception {
+	public void registrar(@Valid @RequestBody Medicamento bean) throws Exception {
 		serviceMed.registrar(bean);
 	}
 	

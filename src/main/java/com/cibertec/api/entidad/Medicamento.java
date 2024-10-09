@@ -10,10 +10,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 // 1
 @Entity
 @Table(name = "tb_medicamento")
+@Data
 public class Medicamento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +26,12 @@ public class Medicamento {
 	private Integer codigo;
 	
 	@Column(name = "nom_med")
+	@NotNull(message = "El nombre del medicamento es obligatorio")
 	private String nombre;
 	
 	@Column(name = "stock_med")
+	@Min(value = 1, message = "Campo stock MIN: 1")
+	@Max(value = 9, message = "Campo stock MAX: 9")
 	private int stock;
 	
 	@Column(name = "pre_med")

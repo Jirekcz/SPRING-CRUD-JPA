@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cibertec.api.entidad.Laboratorio;
 import com.cibertec.api.serviceImpl.LaboratorioService;
+import com.cibertec.api.utils.ModelNotFoundException;
 
 // 4
 @RestController // Para clases que contengan metodos que tendran endpoints
@@ -30,7 +31,12 @@ public class LaboratorioController {
 	
 	@GetMapping("/buscar/{codigo}")
 	public Laboratorio buscarPorId(@PathVariable Integer codigo) throws Exception {
-		return serviceLab.buscar(codigo);
+		Laboratorio bean = serviceLab.buscar(codigo);
+		if (bean == null) {
+			throw new ModelNotFoundException("Codigo no encontrado:" + codigo);
+		} else {
+			return serviceLab.buscar(codigo);
+		}
 	}
 	
 	@PostMapping("/registrar")
